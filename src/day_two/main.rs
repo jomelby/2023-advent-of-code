@@ -13,6 +13,12 @@ pub struct ColorSet {
     blue: i32,
 }
 
+impl ColorSet {
+    fn power(&self) -> i32 {
+        self.green * self.red * self.blue
+    }
+}
+
 impl PartialOrd for ColorSet {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         if self.green == other.green && self.red == other.red && self.blue == other.blue {
@@ -50,6 +56,14 @@ fn get_color_set_from_set(set_str: &str) -> ColorSet {
     ColorSet { green, red, blue }
 }
 
+fn return_max_color_set(color_set: &ColorSet, other: &ColorSet) -> ColorSet {
+    ColorSet {
+        green: std::cmp::max(color_set.green, other.green),
+        red: std::cmp::max(color_set.red, other.red),
+        blue: std::cmp::max(color_set.blue, other.blue),
+    }
+}
+
 fn get_sets_from_line(line: &str) -> Vec<&str> {
     let game_sets: Vec<&str> = line.split(":").collect();
     let sets: Vec<&str> = game_sets[1].split(";").collect();
@@ -58,35 +72,20 @@ fn get_sets_from_line(line: &str) -> Vec<&str> {
 
 fn main() {
     let lines: Vec<String> = get_lines_from_filepath("data/day_two_input.txt");
-    let ref_set: ColorSet = ColorSet {
-        green: 13,
-        red: 12,
-        blue: 14,
-    };
-    let example_set = ColorSet {
-        green: 6,
-        red: 12,
-        blue: 8,
-    };
-    println!("{}", (ref_set >= example_set));
-    let mut game_number_sum = 0;
+    let mut power_sum = 0;
     for line in lines.iter() {
         let game_number = get_game_number(line);
         println!("{} ", game_number);
-        let mut possible: bool = true;
+        let mut max_set = ColorSet {
+            green: 0,
+            red: 0,
+            blue: 0,
+        };
         for set in get_sets_from_line(line).iter() {
-            if !possible {
-                continue;
-            }
             let color_set: ColorSet = get_color_set_from_set(set);
-            println!("{:?} ", color_set);
-            println!("{} ", (ref_set >= color_set));
-            possible = ref_set >= color_set;
+            max_set = return_max_color_set(&max_set, &color_set);
         }
-        if possible {
-            println!("Possible:{}", possible);
-            game_number_sum += game_number;
-        }
+        power_sum += max_set.power();
     }
-    println!("{}", game_number_sum)
+    println!("{}", power_sum)
 }
