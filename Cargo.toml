@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rayon = "1.5.1"
 
 [[bin]]
 name = "day_one"
@@ -22,6 +23,15 @@ path = "src/day_three/main.rs"
 [[bin]]
 name = "day_four"
 path = "src/day_four/main.rs"
+
+[[bin]]
+name = "day_five"
+path = "src/day_five/main.rs"
+
+
+[[bin]]
+name = "day_six"
+path = "src/day_six/main.rs"
 
 [[bin]]
 name = "utils"
