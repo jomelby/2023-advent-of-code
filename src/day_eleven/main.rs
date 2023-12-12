@@ -236,7 +236,7 @@ fn test_galaxy_expansion_part_two() {
 #[test]
 fn test_part_two() {
     let lines: Vec<String> = get_lines_from_filepath("data/day_eleven_test.txt");
-    assert_eq!(part_two(&lines,9), 8410);
+    assert_eq!(part_two(&lines, 9), 8410);
 }
 
 #[test]
