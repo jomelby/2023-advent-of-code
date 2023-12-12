@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 rayon = "1.5.1"
 lazy_static = "1.4.0"
+itertools = "0.12.0"
 
 [[bin]]
 name = "day_one"
@@ -49,6 +50,10 @@ path = "src/day_nine/main.rs"
 [[bin]]
 name = "day_ten"
 path = "src/day_ten/main.rs"
+
+[[bin]]
+name = "day_eleven"
+path = "src/day_eleven/main.rs"
 
 [[bin]]
 name = "utils"
